@@ -54,9 +54,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email address should be lower case" do
-    @user.email = @user.email.upcase
+    mixed_case = "FoO@BaR.CoM"
+    @user.email = mixed_case
     @user.save
-    assert @user.email != @user.email.upcase
+    assert_equal mixed_case.downcase, @user.reload.email
   end
 
   test "password should have a minimum length" do
